@@ -1,0 +1,26 @@
+### Requêtes de test (extension VS Code « REST Client »)
+### Démarrer d'abord le serveur : node seance2-architecture/tp2-andriamihamina/main.js
+
+### Commande payée -> 201
+POST http://localhost:3001/orders
+Content-Type: application/json
+
+{"customerId":"C-42","items":[{"sku":"CLAVIER","qty":2}]}
+
+### Commande refusée (598 €) -> 402
+POST http://localhost:3001/orders
+Content-Type: application/json
+
+{"customerId":"C-42","items":[{"sku":"ECRAN","qty":2}]}
+
+### Relire la commande refusée -> 200
+GET http://localhost:3001/orders/CMD-0002
+
+### Produit inconnu -> 400
+POST http://localhost:3001/orders
+Content-Type: application/json
+
+{"customerId":"C-42","items":[{"sku":"TELE","qty":1}]}
+
+### Commande introuvable -> 404
+GET http://localhost:3001/orders/CMD-9999
